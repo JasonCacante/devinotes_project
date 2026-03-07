@@ -17,7 +17,7 @@
         "github.copilot-chat",
         "Anthropic.claude-code",
         "Gruntfuggly.activitusbar",
-        "DaltonMenezes.aura-theme",
+        "teabyii.ayu",
         "steoates.autoimport",
         "njpwerner.autodocstring",
         "eamodio.gitlens",
@@ -36,6 +36,7 @@
         "settingsSync.store.size": 100000,
         "github.codespaces.devcontainerTTL": 0,
         "github.codespaces.syncSettings": false,
+        "workbench.colorTheme": "Ayu Mirage",
         "terminal.integrated.defaultProfile.linux": "zsh"
       }
     }
