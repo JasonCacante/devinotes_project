@@ -1,9 +1,10 @@
 {
   "name": "devinotes",
   "image": "mcr.microsoft.com/devcontainers/python:3.14",
-
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
   "postCreateCommand": "bash .devcontainer/setup.sh",
-
   "customizations": {
     "vscode": {
       "extensions": [
@@ -14,12 +15,11 @@
         "ms-python.debugpy",
         "github.copilot",
         "github.copilot-chat",
-        "anthropic.claude-code",
+        "Anthropic.claude-code",
         "Gruntfuggly.activitusbar",
         "DaltonMenezes.aura-theme",
         "steoates.autoimport",
         "njpwerner.autodocstring",
-        "Anthropic.claude-code",
         "eamodio.gitlens",
         "oderwat.indent-rainbow",
         "ms-python.isort",
@@ -32,16 +32,25 @@
         "editor.formatOnSave": true,
         "[python]": {
           "editor.defaultFormatter": "charliermarsh.ruff"
-        }
+        },
+        "settingsSync.store.size": 100000,
+        "github.codespaces.devcontainerTTL": 0,
+        "terminal.integrated.defaultProfile.linux": "zsh"
       }
     }
   },
-
+  "mounts": [
+    "source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/dotfiles,target=/home/vscode/dotfiles,type=bind,consistency=cached",
+    "source=devinotes-vscode-settings,target=/home/vscode/.config/Code/User,type=volume",
+    "source=devinotes-vscode-extensions,target=/home/vscode/.vscode/extensions,type=volume"
+  ],
   "remoteEnv": {
-    "SSH_AUTH_SOCK": "${localEnv:SSH_AUTH_SOCK}"
+    "CLAUDE_CONFIG_DIR": "/home/vscode/.claude"
   },
-
-  "forwardPorts": [8000],
+  "forwardPorts": [
+    8000
+  ],
   "portsAttributes": {
     "8000": {
       "label": "FastAPI",
