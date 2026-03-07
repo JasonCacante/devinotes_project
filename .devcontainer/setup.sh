@@ -6,7 +6,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 export PATH="$HOME/.local/bin:$PATH"
 
 # Instalar dependencias del proyecto
-uv sync
+[ -f pyproject.toml ] && uv sync
 
 # Instalar dotfiles (zsh, plugins, p10k)
 if [ -d "$HOME/dotfiles" ]; then
