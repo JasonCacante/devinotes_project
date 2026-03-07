@@ -11,6 +11,8 @@ export PATH="$HOME/.local/bin:$PATH"
 # Instalar dotfiles (zsh, plugins, p10k)
 if [ -d "$HOME/dotfiles" ]; then
   bash "$HOME/dotfiles/install.sh"
+  # Sobreescribir el .zshrc del host con el del devcontainer (sin rutas hardcodeadas)
+  cp "$(dirname "$0")/.zshrc" "$HOME/.zshrc"
 else
   echo "AVISO: ~/dotfiles no encontrado - clona tu repo de dotfiles primero"
 fi
