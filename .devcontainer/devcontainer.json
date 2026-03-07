@@ -37,6 +37,10 @@
     }
   },
 
+  "remoteEnv": {
+    "SSH_AUTH_SOCK": "${localEnv:SSH_AUTH_SOCK}"
+  },
+
   "forwardPorts": [8000],
   "portsAttributes": {
     "8000": {
