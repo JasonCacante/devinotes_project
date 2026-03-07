@@ -7,6 +7,7 @@ from sqlmodel import Field, SQLModel
 class ShareRole(str, Enum):
     READ = "read"
     WRITE = "write"
+    EDIT = "edit"
 
 
 class NoteShare(SQLModel, table=True):
