@@ -8,33 +8,18 @@ export PATH="$HOME/.local/bin:$PATH"
 # Instalar dependencias del proyecto
 uv sync
 
-# Instalar oh-my-zsh sin interacción (solo si no existe)
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+# Instalar dotfiles (zsh, plugins, p10k)
+if [ -d "$HOME/dotfiles" ]; then
+  bash "$HOME/dotfiles/install.sh"
+else
+  echo "AVISO: ~/dotfiles no encontrado - clona tu repo de dotfiles primero"
 fi
 
-# Instalar Powerlevel10k (solo si no existe)
-if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
-    "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+# Claude Code config se monta directamente desde el host (~/.claude bind mount)
+if [ -d ~/.claude ]; then
+  echo "Directorio .claude montado desde el host"
+else
+  echo "AVISO: ~/.claude no encontrado - asegurate de que existe en el host WSL"
 fi
-
-# Instalar plugins de zsh (solo si no existen)
-if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ]; then
-  git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git \
-    "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
-fi
-
-if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
-  git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions.git \
-    "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
-fi
-
-# Copiar .zshrc limpio (sin secrets)
-cp .devcontainer/.zshrc ~/.zshrc
-cp .devcontainer/.p10k.zsh ~/.p10k.zsh
-
-# Configurar zsh como shell por defecto
-sudo chsh -s "$(which zsh)" "$USER"
 
 echo "Setup completado"
