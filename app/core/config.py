@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     JWT_SECRET_KEY: str
     JWT_ALGORITHM: str = "HS256"
     JWT_EXPIRES_MINUTES: int = 60 * 24  # 1 day
+    PROJECT_NAME = "Devinotes"
 
 
 settings = Settings()  # type: ignore[call-arg]
