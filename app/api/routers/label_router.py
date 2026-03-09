@@ -8,15 +8,15 @@ router = APIRouter(prefix="/labels", tags=["Labels"])
 
 
 @router.get("/", response_model=list[LabelRead])
-def list_notes(db: DBSession, user: CurrentUser):
+def list_labels(db: DBSession, user: CurrentUser):
     return LabelService(db).list(owner_id=user.id)
 
 
 @router.post("/", response_model=LabelRead, status_code=status.HTTP_201_CREATED)
-def create_note(payload: LabelCreate, db: DBSession, user: CurrentUser):
+def create_label(payload: LabelCreate, db: DBSession, user: CurrentUser):
     return LabelService(db).create(owner_id=user.id, payload=payload)
 
 
 @router.delete("/{label_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_note(label_id: int, db: DBSession, user: CurrentUser):
+def delete_label(label_id: int, db: DBSession, user: CurrentUser):
     LabelService(db).delete(owner_id=user.id, label_id=label_id)
