@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.routers import auth_router, label_router, notes_router, share_router
-from app.core.config import Settings
+from app.core.config import settings
 from app.core.db import init_db
 
 load_dotenv()
@@ -18,7 +18,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title=Settings.PROJECT_NAME,
+    title=settings.PROJECT_NAME,
     lifespan=lifespan,
     swagger_ui_init_oauth={"persistAuthorization": True},
 )
