@@ -4,7 +4,7 @@ from app.api.deps import CurrentUser, DBSession
 from app.models.share import ShareRequest
 from app.services.share_service import ShareService
 
-router = APIRouter(prefix="/auth", tags=["Auth"])
+router = APIRouter(prefix="/shares", tags=["Shares"])
 
 
 @router.post("/notes/{note_id}", status_code=status.HTTP_201_CREATED)
