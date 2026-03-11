@@ -13,7 +13,8 @@ load_dotenv()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    init_db()
+    if settings.ENVIRONMENT == "dev":
+        init_db()
     yield
 
 
@@ -34,4 +35,5 @@ app.add_middleware(
 app.include_router(auth_router, prefix="/api/v1")
 app.include_router(label_router, prefix="/api/v1")
 app.include_router(notes_router, prefix="/api/v1")
+app.include_router(share_router, prefix="/api/v1")
 app.include_router(share_router, prefix="/api/v1")
