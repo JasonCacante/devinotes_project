@@ -1,11 +1,10 @@
-import os
 from typing import Iterator
 
 from sqlmodel import Session, SQLModel, create_engine
 
 from app.core.config import settings
 
-raw_url = os.environ["DATABASE_URL"]
+raw_url = settings.DATABASE_URL
 url = raw_url
 
 if url.startswith("postgres://"):
